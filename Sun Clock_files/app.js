@@ -33,9 +33,9 @@ const App = (function() {
 	// app settings - single source of truth for defaults and current values
 	let settings = {
 		showMoon           : true,
-		showHourNumbers    : true,
+		showHourNumbers    : false,
 		showOddHourNumbers : false,
-		showHourMarks      : true,
+		showHourMarks      : false,
 		showMinuteHand     : true,
 		showMinuteMarks    : true,
 		showMinuteNumbers  : true,
