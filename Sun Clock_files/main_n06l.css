@@ -1,0 +1,125 @@
+/* sunclock main.css */
+
+html, body {color:#000; background:#fff;}
+body {margin:0; padding:0; font-size:1em; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; overflow:auto;}
+
+/* text */
+h1 {display:none; font-size:1.2em; margin:0; font-weight:normal; text-align:center;}
+h2 {font-size:1.2em; margin:0 0 1em 0;}
+h3 {font-size:1.0em; margin:2em 0 1em 0}
+h4 {font-size:0.9em; margin:2em 0 1em 0}
+p {margin:0 0 1em 0;}
+p.to {margin:-0.5em 0 0.5em 0; font-style:italic;}
+big {font-size:1.2em;}
+sup {font-size:0.75em; margin:0 0.2em;}
+.center {text-align:center;}
+.nobr {white-space:nowrap;}
+.hide {display:none;}
+.error {color:#d00;}
+
+table {margin:0 0 1em 0; border-collapse:collapse;}
+th {text-align:left;}
+th, td {padding:0.3em 0.5em; border:1px solid rgba(127,127,127,0.2);}
+/*td:nth-child(2) {text-align:right;}*/
+
+/* links */
+a {color:#00e; text-decoration:none;}
+a:visited {color:#a0e;}
+a:hover {text-decoration:underline;}
+
+/* nav links */
+nav a:link,    a.close {text-decoration:none; font-weight:bold; color:#003;}
+nav a:visited, a.close:visited {color:#003;}
+nav a:hover,   a.close:hover   {color:#f00;}
+.done a:visited {color:#00e;}
+
+/* nav positions */
+nav, main, footer, section, article, div {box-sizing:border-box;}
+nav {position:absolute; margin:0;}
+nav svg {width:1.625em; height:1.625em;}
+#nav1 {left:16px; top:16px;}
+#nav2 {right:16px; top:16px; text-align:right;}
+#nav1 {left:16px; top:16px;}
+#nav1 a[title="Clock"] {display:none;}
+
+#fullscreen {display:none; margin-left:0em;}
+#fullscreen .exit {display:none;}
+
+
+/* --- LAYOUT --- */
+#clock  {display:block; width:100vmin; width:100dvmin; height:100vmin; height:100dvmin; margin:0 auto; padding:0;}
+#calendar {display:none; width:100vmin; width:100dvmin; height:100vmin; height:100dvmin; margin:0 auto; padding:0;}
+.info   {display:block; width:100vmin; width:100dvmin; max-width:40em; min-height:12em; margin:0 auto; padding:0.01em 1em; text-align:center;}
+section {display:block; width:100vmin; width:100dvmin; max-width:40em; margin:0 auto; padding:0; overflow-x:hidden; overflow-y:scroll; overscroll-behavior:contain;} /* default for no-js */
+section.overlay {display:none; position:fixed; left:0; top:0; width:100vw; max-width:100vw; height:100vh; height:100dvh; margin:0; background:rgba(255,255,255,0.90); backdrop-filter:blur(3px); -webkit-backdrop-filter: blur(3px);} /* .overlay class added via js */
+
+/* clock bg */
+.skyBackground {
+	width:300px; height:300px; border-radius:150px;
+	background-image:conic-gradient(from 180deg,
+		#192029 72deg, #213c66 78deg, #4574bc 84deg, #88a6d4 90deg, #ff9900 90deg, #ffe988 95deg, #dceaff 110deg,
+		#dceaff 250deg, #ffe988 265deg, #ff9900 270deg, #88a6d4 270deg, #4574bc 276deg, #213c66 282deg, #192029 288deg);
+}
+
+/* hide odd hour numbers by default */
+#hourNumbers g:nth-child(odd) {display:none;}
+#hourNumbers.showOdd g:nth-child(odd) {display:block;}
+
+/* info */
+#info1 {display:block;}
+#info2 {display:block;}
+.info h3 {margin:1em 0;}
+.info .done {display:none;}
+#timeText {display:none;}
+
+/* sections */
+section > div {position:relative; margin:0; padding:1em;}
+.close {position:absolute; right:1.3em; top:1.3em; margin:0; line-height:1;}
+
+/* about */
+#bmc {margin:1em auto; text-align:center;}
+#bmc a {display:inline-block; padding:13px 27px 9px 24px; color:#0d0c23; background:#fd0; border-radius:11px;}
+#bmc a:hover {color:#fd0c23;}
+
+/* settings */
+#settings {display:none;}
+#settings p {line-height:1.7em;}
+#settings input[name="showOddHourNumbers"], #settings input[name="showHourMarks"], #settings input[name="showMinuteMarks"],
+	#settings input[name="showMinuteNumbers"], #settings input[name="sweepHand"] {margin-left:2.2em;}
+#setDirection {display:none; margin:-1em 0 1em 1.5em;}
+#setDirection label {font-size:0.9em;}
+#setLocation {display:none; margin:-0.5em 0 1em 1.5em;}
+#setLocation label {display:inline-block; width:6em; font-size:0.9em;}
+#setLocation input {width:8em; font-size:12px;}
+#setLocation input[type="submit"] {width:auto; font-size:1em;}
+#setLocation span {display:inline-block; line-height:1.2;}
+#setLocation span.hide {display:none;}
+
+/* all times */
+#allTimes {display:none;}
+#allTimes table {margin:1em auto;}
+#allTimes td:nth-child(2) {max-width:22em;}
+
+
+@media (orientation:landscape) {
+	#clock, #calendar {width:100vmin; width:100dvmin; height:100vmin; height:100dvmin;}
+
+	.info {position:absolute; left:0; top:4em; width:calc(50vw - 50vmin); width:calc(50vw - 50dvmin); height:calc(100vh - 4em); height:calc(100dvh - 4em); overflow:visible;}
+	#info1 {padding-right:0; text-align:left;}
+	#info2 {display:block; left:auto; right:0em; padding-left:0; text-align:right;}
+}
+
+@media (orientation:portrait) {
+	#clock, #calendar {margin-top:1.8em;}
+}
+
+@media (min-width:30rem) {
+	html, html body {background:#ccc;}
+	section.overlay {background:rgba(204,204,204,0.9); overflow:hidden;}
+	section.overlay > div {width:40em; max-width:80vw; height:auto; max-height:90vh; max-height:90dvh; margin:5vh auto; margin:5dvh auto; background:rgba(255,255,255,0.7); overflow-x:hidden; overflow-y:auto; border:1px solid #999; border-radius:7px; box-shadow:0 5px 10px 8px rgba(0, 0, 0, 0.2);;}
+	#settings.overlay > div {width:22em;}
+}
+
+@media (hover:none) {
+	.info .done {display:block;}
+}
