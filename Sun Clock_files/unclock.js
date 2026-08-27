@@ -478,7 +478,7 @@ const SunClock = (function() {
 		return (n < 10) ? ('0' + n) : n;
 	}
 
-	function drawNumbers2(parent, n, m, offset, startAtTop, vertical, zeroPad) {
+	function drawNumbers2(parent, n, m, offset, isntbackwards, startAtTop, vertical, zeroPad) {
 		// draw the numbers on the clock face
 		let g, angle, str;
 		let p = $(parent);
@@ -497,7 +497,7 @@ const SunClock = (function() {
 			g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 			g.setAttribute('x', 0);
 			g.setAttribute('y', 0);
-			angle = ((i * -direction * (360/n) + angleOffset + 360) % 360); // 0 <= angle < 360
+			angle = ((i * isntbackwards * direction * (360/n) + angleOffset + 360) % 360); // 0 <= angle < 360
 			g.setAttribute('transform', `rotate(${angle}) translate(0,${radius + h * offset})`);
 
 			if ((parent === '#hourNumbers') && App.settings.hour12) {
@@ -523,8 +523,8 @@ const SunClock = (function() {
 	}
 
 	function drawNumbers() {
-		drawNumbers2('#hourNumbers',   24, 1, -30, false, true, false);
-		drawNumbers2('#minuteNumbers', 60, 5, -12, true,  false, true);
+		drawNumbers2('#hourNumbers',   24, 1, -30, -1, false, true, false);
+		drawNumbers2('#minuteNumbers', 60, 5, -12, 1, true,  false, true);
 	}
 
 	function updateDirection() {
