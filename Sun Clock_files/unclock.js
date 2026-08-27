@@ -283,7 +283,7 @@ const SunClock = (function() {
 				path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 				path.setAttribute('id', p[0]);
 				path.setAttribute('cursor', 'crosshair');
-				path.setAttribute('d',`M 0,0 L ${point1} A ${radius} ${radius} 0 0 ${(direction>0) ? 1 : 0} ${point2} z`); // sweep-flag depends on direction
+				path.setAttribute('d',`M 0,0 L ${point1} A ${radius} ${radius} 0 0 ${(direction<0) ? 1 : 0} ${point2} z`); // sweep-flag depends on direction
 				$('#arcs').appendChild(path);
 
 				// add hover event to the arc
