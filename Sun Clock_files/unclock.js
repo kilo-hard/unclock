@@ -523,7 +523,7 @@ const SunClock = (function() {
 	}
 
 	function drawNumbers() {
-		drawNumbers2('#hourNumbers',   24, 1, -30, -1, false, true, false);
+		drawNumbers2('#hourNumbers',   24, 1, -32, -1, false, true, false);
 		drawNumbers2('#minuteNumbers', 60, 5, -12, 1, true,  false, true);
 	}
 

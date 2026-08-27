@@ -34,7 +34,7 @@ const App = (function() {
 	let settings = {
 		showMoon           : true,
 		showHourNumbers    : true,
-		showOddHourNumbers : false,
+		showOddHourNumbers : true,
 		showHourMarks      : false,
 		showMinuteHand     : true,
 		showMinuteMarks    : true,
