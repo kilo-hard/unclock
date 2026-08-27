@@ -33,7 +33,7 @@ const App = (function() {
 	// app settings - single source of truth for defaults and current values
 	let settings = {
 		showMoon           : true,
-		showHourNumbers    : false,
+		showHourNumbers    : true,
 		showOddHourNumbers : false,
 		showHourMarks      : false,
 		showMinuteHand     : true,

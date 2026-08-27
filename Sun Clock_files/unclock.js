@@ -88,7 +88,7 @@ const SunClock = (function() {
 		let direction = App.settings.direction;
 		//var angle = ((date.getHours() + date.getMinutes()/60 + date.getSeconds()/3600) / 24 * tau); // radians
 		var angle = ((date.getHours() + date.getMinutes()/60 + (dateOffset-nowOffset)/60 + date.getSeconds()/3600) / 24 * tau); // radians
-		return `${Math.sin(angle) * radius * -direction}, ${Math.cos(angle) * radius}`; // return as string for svg path attribute
+		return `${Math.sin(angle) * radius * direction}, ${Math.cos(angle) * radius}`; // return as string for svg path attribute
 	}
 
 	function getEarlier(time) {
@@ -462,7 +462,7 @@ const SunClock = (function() {
 			m.setAttribute('y1', 0);
 			m.setAttribute('x2', 0);
 			m.setAttribute('y2', length);
-			m.setAttribute('transform', `rotate(${i * (360/n)}) translate(0,${radius - inset})`);
+			m.setAttribute('transform', `rotate(${i * (360/n)}) translate(0,${130 - inset})`);
 			$(parent).appendChild(m);
 		}
 	}
@@ -470,7 +470,7 @@ const SunClock = (function() {
 	function drawMarks() {
 		drawMarks2('#hourMarks',  24, 0, -4, 25);
 		drawMarks2('#hourMarks2', 24, 2, -9, 25);
-		drawMarks2('#minuteMarks', 60, 0, 3, 100);
+		drawMarks2('#minuteMarks', 60, 0, 5, 10);
 	}
 
 	function pad2(n) {
@@ -497,7 +497,7 @@ const SunClock = (function() {
 			g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 			g.setAttribute('x', 0);
 			g.setAttribute('y', 0);
-			angle = ((i * direction * (360/n) + angleOffset + 360) % 360); // 0 <= angle < 360
+			angle = ((i * -direction * (360/n) + angleOffset + 360) % 360); // 0 <= angle < 360
 			g.setAttribute('transform', `rotate(${angle}) translate(0,${radius + h * offset})`);
 
 			if ((parent === '#hourNumbers') && App.settings.hour12) {
@@ -523,7 +523,7 @@ const SunClock = (function() {
 	}
 
 	function drawNumbers() {
-		drawNumbers2('#hourNumbers',   24, 1, -4, false, true, false);
+		drawNumbers2('#hourNumbers',   24, 1, -30, false, true, false);
 		drawNumbers2('#minuteNumbers', 60, 5, -12, true,  false, true);
 	}
 
@@ -603,8 +603,8 @@ const SunClock = (function() {
 		// move hands
 		secondHand.setAttribute('transform', `rotate(${ seconds * direction * 6 })`); //  6° per second
 		minuteHand.setAttribute('transform', `rotate(${ minutes * direction * 6 })`); //  6° per minute
-		disc.setAttribute('transform',   `rotate(${ (hours  * -direction * 15) })`); // 15° per hour
-		moonHand.setAttribute('transform', `rotate(${ 180 - (moonPhase * direction * 360) })`); // ~14.5° per hour
+		disc.setAttribute('transform',   `rotate(${ ((hours-12)  * direction * 15) })`); // 15° per hour
+		moonHand.setAttribute('transform', `rotate(${ 210 - (moonPhase * direction * 360) })`); // ~14.5° per hour
 		moonIcon.setAttribute('transform', `translate(0 40) rotate(${90 + direction * 90})`); // only on direction change
 
 		// clock icon hand
