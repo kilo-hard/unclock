@@ -35,7 +35,7 @@ const App = (function() {
 		showMoon           : true,
 		showHourNumbers    : true,
 		showOddHourNumbers : true,
-		showHourMarks      : false,
+		showHourMarks      : true,
 		showMinuteHand     : true,
 		showMinuteMarks    : true,
 		showMinuteNumbers  : true,
