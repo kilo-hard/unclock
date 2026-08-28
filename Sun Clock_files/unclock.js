@@ -468,9 +468,9 @@ const SunClock = (function() {
 	}
 
 	function drawMarks() {
-		drawMarks2('#hourMarks',  24, 0, -4, 25);
-		drawMarks2('#hourMarks2', 24, 2, -9, 25);
-		drawMarks2('#minuteMarks', 60, 0, 5, 10);
+		drawMarks2('#hourMarks',  24, 0, -4, 40);
+		drawMarks2('#hourMarks2', 24, 2, -6, 40);
+		drawMarks2('#minuteMarks', 60, 0, 5, 0);
 	}
 
 	function pad2(n) {
@@ -478,7 +478,7 @@ const SunClock = (function() {
 		return (n < 10) ? ('0' + n) : n;
 	}
 
-	function drawNumbers2(parent, n, m, offset, isntbackwards, startAtTop, vertical, zeroPad) {
+	function drawNumbers2(parent, n, m, offset, isntbackwards, startAtTop, backed, zeroPad) {
 		// draw the numbers on the clock face
 		let g, angle, str;
 		let p = $(parent);
@@ -498,7 +498,7 @@ const SunClock = (function() {
 			g.setAttribute('x', 0);
 			g.setAttribute('y', 0);
 			angle = ((i * isntbackwards * direction * (360/n) + angleOffset + 360) % 360); // 0 <= angle < 360
-			g.setAttribute('transform', `rotate(${angle}) translate(0,${radius + h * offset})`);
+			g.setAttribute('transform', `rotate(${angle}) translate(0,${130 + h * offset})`);
 
 			if ((parent === '#hourNumbers') && App.settings.hour12) {
 				let j = i;
@@ -508,9 +508,9 @@ const SunClock = (function() {
 				str = zeroPad ? pad2(i) : i;
 			}
 
-			if (vertical) {
-				g.innerHTML = `<circle cx="0" cy="0" r="${(h*0.833)}" fill="rgba(255,255,255,0.33)" stroke="none" />`;
-				g.innerHTML += `<text x="0" y="${(h*0.375)}" transform="rotate(${angle*-1})">${str}</text>`;
+			if (backed) {
+				g.innerHTML = `<circle cx="-2" cy="0" r="${(h*0.833)}" fill="rgba(255,255,255,0.33)" stroke="none" />`;
+				g.innerHTML += `<text x="0" y="${(h*0.375)}" transform="rotate(180)">${str}</text>`;
 			} else {
 				if ((angle >= 90) && (angle <= 270)) {
 					g.innerHTML = `<text x="0" y="0" transform="rotate(180)">${str}</text>`;
@@ -523,8 +523,8 @@ const SunClock = (function() {
 	}
 
 	function drawNumbers() {
-		drawNumbers2('#hourNumbers',   24, 1, -32, -1, false, true, false);
-		drawNumbers2('#minuteNumbers', 60, 5, -12, 1, true,  false, true);
+		drawNumbers2('#hourNumbers',   24, 1, -14, -1, false, true, false);
+		drawNumbers2('#minuteNumbers', 60, 5, 0.5, 1, true,  false, true);
 	}
 
 	function updateDirection() {
@@ -603,18 +603,18 @@ const SunClock = (function() {
 		// move hands
 		secondHand.setAttribute('transform', `rotate(${ seconds * direction * 6 })`); //  6° per second
 		minuteHand.setAttribute('transform', `rotate(${ minutes * direction * 6 })`); //  6° per minute
-		disc.setAttribute('transform',   `rotate(${ ((hours-12)  * direction * 15) })`); // 15° per hour
-		moonHand.setAttribute('transform', `rotate(${ 150 - (moonPhase * direction * 360) })`); // ~14.5° per hour
+		disc.setAttribute('transform',   `rotate(${ (hours-12)  * direction * 15 })`); // 15° per hour
+		moonHand.setAttribute('transform', `rotate(${ 160 - (moonPhase * direction * 360) })`); // ~14.5° per hour
 		moonIcon.setAttribute('transform', `translate(0 40) rotate(${90 + direction * 90})`); // only on direction change
 
 		// clock icon hand
 		clockIconHours.setAttribute('transform', `rotate(${ hours * direction * 15 })`);
 		clockIconMinutes.setAttribute('transform', `rotate(${ minutes * direction * 6  })`);
 
-		// one minute timer
-		if (!timerStart) { timerStart = timestamp || 0; }
-		if ((timestamp - timerStart) >= 60000) {
-			// update moon phase every minute — does not need to be recalculated each frame
+		// moon phase update timer
+		if (!timerStart) { timerStart = minutes || 0; }
+		if ((minutes - timerStart) >= 30 || (minutes - timerStart) <0) {
+			// update moon phase every 30 minutes — does not need to be recalculated each frame
 			// 29.53 days per 360° phase change = ~12.2° per day = ~0.51° per hour = ~0.0085° per minute (i.e. even every minute is excessive!)
 			getMoonPhase();
 			// reset
@@ -634,7 +634,6 @@ const SunClock = (function() {
 		// update the sun times at midnight
 		if ( then && (now.getDate() !== then.getDate()) ) {
 			if (debug) { console.log('midnight: updating sun times!'); }
-			getMoonPhase();
 			getSunTimes();
 			writeDate();
 		}
