@@ -468,8 +468,8 @@ const SunClock = (function() {
 	}
 
 	function drawMarks() {
-		drawMarks2('#hourMarks',  24, 0, -4, 40);
-		drawMarks2('#hourMarks2', 24, 2, -6, 40);
+		drawMarks2('#hourMarks',  24, 0, -4, 50);
+		drawMarks2('#hourMarks2', 24, 2, -8, 50);
 		drawMarks2('#minuteMarks', 60, 0, 5, 0);
 	}
 
