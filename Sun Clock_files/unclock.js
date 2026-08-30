@@ -294,6 +294,8 @@ const SunClock = (function() {
 		// draw solar noon and midnight lines
 		$('#noon').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.solarNoon)}`);
 		$('#midnight').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.nadir2)}`);
+		sunIcon.setAttribute('transform', `translate(${getPointFromTime(sunTimes.solarNoon) .split(',') .map (num => num / 2) .join(',')})`);
+
 	}
 
 	function getCurrentTimePeriod() {
@@ -471,6 +473,7 @@ const SunClock = (function() {
 		drawMarks2('#hourMarks',  24, 0, -4, 50);
 		drawMarks2('#hourMarks2', 24, 2, -8, 50);
 		drawMarks2('#minuteMarks', 60, 0, 5, 0);
+		drawMarks2('#sunbeams', 14, 0, 5, 120);
 	}
 
 	function pad2(n) {
