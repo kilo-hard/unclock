@@ -295,7 +295,7 @@ const SunClock = (function() {
 		$('#noon').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.solarNoon)}`);
 		$('#midnight').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.nadir2)}`);
 		sunIcon.setAttribute('transform', `translate(${getPointFromTime(sunTimes.solarNoon) .split(',') .map (num => num / 2) .join(',')})`);
-
+		nadirstar.setAttribute('transform', `translate(${getPointFromTime(sunTimes.nadir2) .split(',') .map (num => num / 2) .join(',')})`);
 	}
 
 	function getCurrentTimePeriod() {
