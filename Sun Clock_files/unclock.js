@@ -21,7 +21,7 @@ const SunClock = (function() {
 	let clockIconHours, clockIconMinutes;
 	let sunTimes, sunPosition, noonPosition, nadirPosition, sunAlwaysUp, sunAlwaysDown;
 	let periodsTemp, currentPeriod, nextPeriodTime;
-	let moonTimes, moonPosition, moonPhase, moonHand, moonIcon, moonPath;
+	let moonTimes, moonPosition, moonPhase, moonHand, moonIcon, moonPath, solnoondeg;
 
 	const periods = [
 		// name:                        from:               to:                 color:		darkColor:
@@ -296,6 +296,7 @@ const SunClock = (function() {
 		$('#midnight').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.nadir2)}`);
 		sunIcon.setAttribute('transform', `translate(${getPointFromTime(sunTimes.solarNoon) .split(',') .map (num => num / 2) .join(',')})`);
 		nadirstar.setAttribute('transform', `translate(${getPointFromTime(sunTimes.nadir2) .split(',') .map (num => num / 2) .join(',')})`);
+		solnoondeg = ((sunTimes.solarNoon.getHours() + sunTimes.solarNoon.getMinutes()/60 + (sunTimes.solarNoon.getTimezoneOffset()-now.getTimezoneOffset())/60 + sunTimes.solarNoon.getSeconds()/3600) / 24 * 360);
 	}
 
 	function getCurrentTimePeriod() {
@@ -607,7 +608,7 @@ const SunClock = (function() {
 		secondHand.setAttribute('transform', `rotate(${ seconds * direction * 6 })`); //  6° per second
 		minuteHand.setAttribute('transform', `rotate(${ minutes * direction * 6 })`); //  6° per minute
 		disc.setAttribute('transform',   `rotate(${ (hours-12)  * direction * 15 })`); // 15° per hour
-		moonHand.setAttribute('transform', `rotate(${ 160 - (moonPhase * direction * 360) })`); // ~14.5° per hour
+		moonHand.setAttribute('transform', `rotate(${ -solnoondeg - (moonPhase * direction * 360) })`); // ~14.5° per hour
 		moonIcon.setAttribute('transform', `translate(0 40) rotate(${90 + direction * 90})`); // only on direction change
 
 		// clock icon hand

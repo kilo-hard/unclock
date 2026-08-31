@@ -6,7 +6,6 @@ This web app works by downloading a small JS simulation of the solar system, whi
 
 I'm still getting started, and think I've mostly got it functioning again after breaking everything, but there could be division zero.
 
-*Known issue: some of the moon position logic in my fork is broken currently, and if the provided longitude and time zone diverge significantly, the angle of the "moon hand" on the face will be wildly wrong.
 
 You can see Un-Clock in action here: [https://kilo-hard.github.io/unclock/](https://kilo-hard.github.io/unclock/)
 
