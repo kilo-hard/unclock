@@ -691,7 +691,7 @@ const SunClock = (function() {
 		tick();
 
 		// add hover events to the hour and moon hands
-		App.showInfoOnHover(hourHand, getSunInfo);
+		App.showInfoOnHover(sunIcon, getSunInfo);
 		App.showInfoOnHover($('#centerCircle'), getSunInfo);
 		App.showInfoOnHover(moonHand, getMoonInfo);
 	}
