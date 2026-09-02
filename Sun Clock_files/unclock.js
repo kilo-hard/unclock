@@ -21,7 +21,8 @@ const SunClock = (function() {
 	let clockIconHours, clockIconMinutes;
 	let sunTimes, sunPosition, noonPosition, nadirPosition, sunAlwaysUp, sunAlwaysDown;
 	let periodsTemp, currentPeriod, nextPeriodTime;
-	let moonTimes, moonPosition, moonPhase, moonHand, moonIcon, moonPath, solnoondeg;
+	let moonTimes, moonPosition, moonPhase, moonHand, moonIcon, moonPath;
+	let solnoondeg = 185;
 
 	const periods = [
 		// name:                        from:               to:                 color:		darkColor:
