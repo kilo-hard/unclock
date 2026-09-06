@@ -296,8 +296,8 @@ const SunClock = (function() {
 		// draw solar noon and midnight lines
 		$('#noon').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.solarNoon)}`);
 		$('#midnight').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.nadir2)}`);
-		sunIcon.setAttribute('transform', `translate(${getPointFromTime(sunTimes.solarNoon) .split(',') .map (num => num / 2) .join(',')})`);
-		nadirstar.setAttribute('transform', `translate(${getPointFromTime(sunTimes.nadir2) .split(',') .map (num => num / 2) .join(',')})`);
+		sunIcon.setAttribute('transform', `translate(${getPointFromTime(sunTimes.solarNoon) .split(',') .map (num => num / 3) .join(',')})`);
+		nadirstar.setAttribute('transform', `translate(${getPointFromTime(sunTimes.nadir2) .split(',') .map (num => num / 3) .join(',')})`);
 	}
 
 	function getCurrentTimePeriod() {
@@ -472,8 +472,8 @@ const SunClock = (function() {
 	}
 
 	function drawMarks() {
-		drawMarks2('#hourMarks',  24, 0, -4, 50);
-		drawMarks2('#hourMarks2', 24, 2, -8, 50);
+		drawMarks2('#hourMarks',  24, 0, 4, -10);
+		drawMarks2('#hourMarks2', 24, 2, 8, -10);
 		drawMarks2('#minuteMarks', 60, 0, 5, 0);
 		drawMarks2('#sunbeams', 14, 0, 5, 120);
 	}
@@ -528,7 +528,7 @@ const SunClock = (function() {
 	}
 
 	function drawNumbers() {
-		drawNumbers2('#hourNumbers',   24, 1, -14, -1, false, true, false);
+		drawNumbers2('#hourNumbers',   24, 1, 4, -1, false, true, false);
 		drawNumbers2('#minuteNumbers', 60, 5, 0.5, 1, true,  false, true);
 	}
 
