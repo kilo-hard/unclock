@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /libs/
+Disallow: /resources/
+Disallow: /test/
