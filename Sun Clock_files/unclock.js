@@ -135,6 +135,7 @@ const SunClock = (function() {
 		nadirPosition = SunCalc.getPosition(sunTimes.nadir, location.latitude, location.longitude);
 		sunAlwaysUp   = (toDegrees(nadirPosition.altitude) > -0.833) ? true : false; // sun is always above horizon
 		sunAlwaysDown = (toDegrees(noonPosition.altitude)  < -0.833) ? true : false; // sun is always below horizon
+		solnoondeg = ((sunTimes.solarNoon.getHours() + sunTimes.solarNoon.getMinutes()/60 + (sunTimes.solarNoon.getTimezoneOffset()-now.getTimezoneOffset())/60 + sunTimes.solarNoon.getSeconds()/3600) / 24 * 360);
 
 		if (debug) {
 			console.log(sunTimes);
@@ -297,7 +298,6 @@ const SunClock = (function() {
 		$('#midnight').setAttribute('d',`M 0,0 L ${getPointFromTime(sunTimes.nadir2)}`);
 		sunIcon.setAttribute('transform', `translate(${getPointFromTime(sunTimes.solarNoon) .split(',') .map (num => num / 2) .join(',')})`);
 		nadirstar.setAttribute('transform', `translate(${getPointFromTime(sunTimes.nadir2) .split(',') .map (num => num / 2) .join(',')})`);
-		solnoondeg = ((sunTimes.solarNoon.getHours() + sunTimes.solarNoon.getMinutes()/60 + (sunTimes.solarNoon.getTimezoneOffset()-now.getTimezoneOffset())/60 + sunTimes.solarNoon.getSeconds()/3600) / 24 * 360);
 	}
 
 	function getCurrentTimePeriod() {
@@ -609,7 +609,7 @@ const SunClock = (function() {
 		secondHand.setAttribute('transform', `rotate(${ seconds * direction * 6 })`); //  6° per second
 		minuteHand.setAttribute('transform', `rotate(${ minutes * direction * 6 })`); //  6° per minute
 		disc.setAttribute('transform',   `rotate(${ (hours-12)  * direction * 15 })`); // 15° per hour
-		moonHand.setAttribute('transform', `rotate(${ -solnoondeg - (moonPhase * direction * 360) })`); // ~14.5° per hour
+		moonHand.setAttribute('transform', `rotate(${ -direction * (solnoondeg + (moonPhase * 360)) })`); // ~14.5° per hour
 		moonIcon.setAttribute('transform', `translate(0 40) rotate(${90 + direction * 90})`); // only on direction change
 
 		// clock icon hand
@@ -693,6 +693,7 @@ const SunClock = (function() {
 
 		// add hover events to the hour and moon hands
 		App.showInfoOnHover(sunIcon, getSunInfo);
+		App.showInfoOnHover(nadirstar, getSunInfo);
 		App.showInfoOnHover($('#centerCircle'), getSunInfo);
 		App.showInfoOnHover(moonHand, getMoonInfo);
 	}
