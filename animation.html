@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>animation Demo</title>
+	<meta name="description" content="fast animation of the Un-Clock concept">
+	<meta name="author" content="kilo-hard">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#000">
+
+	<link rel="manifest" href="manifest.json?v=4.8.1">
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/colors.css">
+	<link rel="icon" type="image/png" href="icons/icon_512.png">
+	<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+
+	<!-- iOS -->
+	<link rel="apple-touch-icon" type="image/png" href="icons/icon.png">
+	<link rel="apple-touch-startup-image" href="icons/icon.png">
+	<meta name="mobile-web-app-capable" content="yes">
+	<!-- meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" -->
+
+	<script src="scripts/ffwd.js"></script>
+</head>
+<body>
+
+
+
+	<svg id="clock" width="600" height="600" viewBox="150 150 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+		<circle cx="250" cy="250" r="130" fill="none" stroke="#777" stroke-width="0.0" />
+		<clipPath id="clip">
+			<circle cx="0" cy="-90" r="130" />
+		</clipPath>
+		<g clip-path="url(#clip)" transform="translate(300,390)" >
+			<g id="disc" transform="rotate(0)">
+				<g id="arcs" fill="none" stroke="none" stroke-width="0"></g>
+				<g id="hourNumbers"   fill="#000" font-size="5px" style="letter-spacing:-1;"></g>
+				<g id="hourMarks"     fill="none" stroke="#777" stroke-width="0.5"/>
+				<g id="hourMarks2"    fill="none" stroke="#777" stroke-width="0.5"/>
+				<path id="noon"     d="M 0,0 L 0,0" stroke="#fff" stroke-width="0.7" />
+				<path id="midnight" d="M 0,0 L 0,0" stroke="#555" stroke-width="0.7" />
+				<g id="sunIcon" transform="translate(-20 -110)">
+					<circle cx="0" cy="0" r="8.4" fill="#fe2" />
+					<g id="sunbeams" fill="none" stroke="#fe2" stroke-width="1.5"/>
+					<circle cx="0" cy="0" r="15" fill="rgba(255,255,255,0.0)" />
+				</g>
+				<g id="nadirstar" transform="translate(20 110)">
+					<polygon  transform="translate(-12.5 -12.5)" points="12.50,1.25 15.15,8.86 23.20,9.02 16.78,13.89 19.11,21.60 12.50,17.00 5.89,21.60 8.22,13.89 1.80,9.02 9.85,8.86" fill="#fbe024"/>
+				</g>
+
+				<g id="hourHand" cursor="crosshair" transform="rotate(180)">
+					<line x1="0" y1="0" x2="0" y2="80" fill="none" stroke="#transparent" stroke-width="1" stroke-linecap="round"/>
+				</g>
+				<g id="moonHand" cursor="crosshair" transform="rotate(180)">
+					<line x1="0" y1="0" x2="0" y2="40" fill="none" stroke="#aaa" stroke-width="3" />
+					<circle cx="0" cy="0" r="5.5" fill="#aaa" stroke="#f60" stroke-width="0"/>
+					<g id="moonIcon" transform="translate(0 80) rotate(180)">
+						<circle cx="0" cy="0" r="8.4" fill="#aaa" />
+						<circle cx="0" cy="0" r="8.2" fill="#000" stroke="#000" stroke-width="0" />
+						<path fill="#ccc" stroke="#ccc" stroke-width="0" d="" />
+					</g>
+				</g>
+			</g>
+		</g>
+
+
+
+		<g transform="translate(300,300)" font-family="Geneva, Helvetica Neue, Helvetica, Arial" text-anchor="middle">
+			<circle id="clockFace" cx="0" cy="0" r="130" fill="none" stroke="#000" stroke-width="0.5" />
+			<circle cx="0" cy="0" r="130.5" fill="none" stroke="#fff" stroke-width="0.1" />
+
+			<g id="minuteHand" transform="rotate(0)">
+				<line x1="0" y1="-138" x2="0" y2="-129" fill="none" stroke="#e1a" stroke-width="0.3" stroke-linecap="round" />
+				<circle cx="0" cy="-138" r="8" fill="none" stroke="#e1a" stroke-width="4" />
+			</g>
+			<g id="secondHand" transform="rotate(0)" display=none>
+				<line x1="0" y1="-145" x2="0" y2="-129" fill="none" stroke="#a00" stroke-width="0.7" stroke-linecap="round" />
+				<circle cx="0" cy="-145" r="2.5" fill="#a00" stroke="#e00" stroke-width="0" />
+			</g>
+			<g id="minuteMarks"   fill="none" stroke="#e1a" stroke-width="1">
+			</g>
+			<g id="minuteNumbers" fill="#000" font-size="8px" style="letter-spacing:0.8;">
+			</g>
+
+			<g id= "nowindex">
+				<line x1="0" y1="5" x2="0" y2="-110" stroke="#f00" stroke-width="2" stroke-linecap="round" stroke-dasharray="1,9" />
+			</g>
+			<g font="bold 30px sans-serrif" fill="red">
+				<text transform="translate(120,-120)"> DEMO </text>
+				<text transform="translate(-120,120)"> DEMO </text>
+				<text transform="translate(120,120)"> FFwd </text>
+				<text transform="translate(-120,-120)"> FFwd </text>
+			</g>
+		</g>
+
+	</svg>
+
+
+
+
+
+
+	<!-- stats -->
+
+	<noscript><img src="noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade"></noscript>
+
+
+
+</body></html>
