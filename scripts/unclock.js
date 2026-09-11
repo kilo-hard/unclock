@@ -610,7 +610,7 @@ const SunClock = (function() {
 		minuteHand.setAttribute('transform', `rotate(${ minutes * direction * 6 })`); //  6° per minute
 		disc.setAttribute('transform',   `rotate(${ (hours-12)  * direction * 15 })`); // 15° per hour
 		moonHand.setAttribute('transform', `rotate(${ -direction * (solnoondeg + (moonPhase * 360)) })`); // ~14.5° per hour
-		moonIcon.setAttribute('transform', `translate(0 40) rotate(${90 + direction * 90})`); // only on direction change
+		moonIcon.setAttribute('transform', `rotate(${90 + direction * 90})`); // only on direction change
 
 		// clock icon hand
 		clockIconHours.setAttribute('transform', `rotate(${ hours * direction * 15 })`);
