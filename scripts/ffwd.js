@@ -1,10 +1,3 @@
-/*
-	Sun Clock
-	A 24-hour clock that shows sunrise, sunset, golden hour, and twilight times for your current location
-
-	Geoff Pack, May 2022
-	https://github.com/virtualgeoff/sunclock
-*/
 
 // shortcuts
 const $ = document.querySelector.bind(document);
@@ -100,9 +93,6 @@ const FastDemo = (function() {
 
 
 	function getSunTimes() {
-		// get times from suncalc.js
-		//if (!location) { return; }
-
 		sunTimes = null;
 
 		if ( false ) {
@@ -266,9 +256,6 @@ const FastDemo = (function() {
 				path.setAttribute('cursor', 'crosshair');
 				path.setAttribute('d',`M 0,0 L ${point1} A ${radius} ${radius} 0 0 ${(direction<0) ? 1 : 0} ${point2} z`); // sweep-flag depends on direction
 				$('#arcs').appendChild(path);
-
-				// add hover event to the arc
-				//App.showInfoOnHover(path, getPeriodInfo, i);
 			}
 		}
 
@@ -317,42 +304,6 @@ const FastDemo = (function() {
 
 	function getMoonPhase() {
 		$('#moonIcon path').setAttribute('d', drawMoonIcon(moonPhase) );
-	}
-
-
-	function getMoonPhaseName(phase) {
-		// get name of moon phase
-		const moons = [
-			['New Moon',        '🌑'],
-			['Waxing Crescent', '🌒'],
-			['First Quarter',   '🌓'],
-			['Waxing Gibbous',  '🌔'],
-			['Full Moon',       '🌕'],
-			['Waning Gibbous',  '🌖'],
-			['Last Quarter',    '🌗'],
-			['Waning Crescent', '🌘']
-		];
-
-		const d = 0.0167; // 1.67 % ~= 1/2 day per month ?
-		let i = 0;
-
-		// there's probably a really elegant way to do this, but...
-		if ((phase > 0.0 + d) && (phase < 0.25 - d)) {
-			i = 1;
-		} else if ((phase >= 0.25 - d) && (phase <= 0.25 + d)) {
-			i = 2;
-		} else if ((phase > 0.25 + d) && (phase < 0.50 - d)) {
-			i = 3;
-		} else if ((phase >= 0.50 - d) && (phase <= 0.50 + d)) {
-			i = 4;
-		} else if ((phase > 0.50 + d) && (phase < 0.75 - d)) {
-			i = 5;
-		} else if ((phase >= 0.75 - d) && (phase <= 0.75 + d)) {
-			i = 6;
-		} else if ((phase > 0.75 + d) && (phase < 1.0 - d)) {
-			i = 7;
-		}
-		return {'index':i, 'name':moons[i][0], 'icon':moons[i][1]};
 	}
 
 
@@ -507,10 +458,6 @@ const FastDemo = (function() {
 		}
 	}
 
-	function writeDate() {
-		// write the date to info1
-		$('#dateText').innerHTML = `${now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
-	}
 
 	function tick(timestamp) {
 		// animation loop
@@ -528,7 +475,6 @@ const FastDemo = (function() {
 		minuteHand.setAttribute('transform', `rotate(${ vminutes * direction * 6 })`); //  6° per minute
 		disc.setAttribute('transform',   `rotate(${ (vhours-12)  * direction * 15 })`); // 15° per hour
 		moonHand.setAttribute('transform', `rotate(${ -direction * (solnoondeg + (moonPhase * 360)) })`); // ~14.5° per hour
-		moonIcon.setAttribute('transform', `translate(0 40) rotate(${90 + direction * 90})`); // only on direction change
 
 
 		// update timer
@@ -575,7 +521,6 @@ const FastDemo = (function() {
 		drawNumbers();
 
 		// start clock
-		//getMoonPhase();
 		tick();
 
 	}
