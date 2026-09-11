@@ -19,9 +19,9 @@
 	--overlay-border: #999;
 
 	/* time period bg colors */
-	--bg-day:        #ddeeff;
-	--bg-goldenHour: #ffe988;
-	--bg-sunset:     #ff6600;
+	--bg-day:        #ccddff;
+	--bg-goldenHour: #eedd99;
+	--bg-sunset:     #ff9900;
 	--bg-twilight1:  #88a6d4;
 	--bg-twilight2:  #1e3c77;
 	--bg-twilight3:  #1f3044;
@@ -74,11 +74,11 @@
 	--overlay-border: #4c4c4c;
 
 	/* time period bg colors */
-	--bg-day:        #4477cc;
-	--bg-goldenHour: #bbaa66;
-	--bg-sunset:     #ee5500;
 	--bg-twilight1:  #677ea1;
 	--bg-twilight2:  #0f2a55;
+	--bg-day:        #6699cc;
+	--bg-goldenHour: #bbaa77;
+	--bg-sunset:     #cc7700;
 	--bg-twilight3:  #0d1726;
 	--bg-night:      #030303;
 
