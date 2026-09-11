@@ -66,9 +66,9 @@ const FastDemo = (function() {
 
 	function getSunTimes() {
 		sunTimes = null;
-		sixdeg = 2;
+		sixdeg = 1.2;
 		// un-comment only one of the longday definition lines to set how day length is determined
-			if (!longday) { longday = (Math.random() < 0.5) ? 3 : -3; } // initial coinflip
+			if (!longday) { longday = (Math.random() < 0.5) ? 2 : -2; } // initial coinflip
 			//longday = (Math.sin(now.getMinutes()/60 + now.getHours() * tau / 6 ) * 4 ) // slow year
 			//longday = (Math.sin((now.getMinutes() + seconds/60) * tau / 10 ) * 4 ) // warpspeed year
 		solarlag =2;
