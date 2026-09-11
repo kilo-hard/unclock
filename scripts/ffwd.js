@@ -454,7 +454,7 @@ const FastDemo = (function() {
 		seconds = now.getSeconds() + (now.getMilliseconds())/1000;
 		vminutes = (seconds * 24) % 60;
 		vhours   = seconds * 0.4;
-		moonPhase = ((now.getMinutes() + (now.getSeconds()/60))/30) %1 ;
+		moonPhase = ( (0.5 + now.getMinutes() + (seconds/60)) /10) %1 ;
 
 		// move hands
 		//secondHand.setAttribute('transform', `rotate(${ seconds * direction * 6 })`); //  6° per second
@@ -465,8 +465,8 @@ const FastDemo = (function() {
 
 		// update timer
 		if (!timerStart) { timerStart = vhours || 0; }
-		if ((vhours - timerStart) >= 6 || (vhours - timerStart) <0) {
-			// update every quarter turn
+		if ((vhours - timerStart) >= 1 || (vhours - timerStart) <0) {
+			// update moon icon, and if we want, day length
 			getMoonPhase();
 			getSunTimes(); // uncomment to animate day length
 			// reset
