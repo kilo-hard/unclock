@@ -30,6 +30,7 @@ const FastDemo = (function() {
 	let periodsTemp, currentPeriod, nextPeriodTime;
 	let moonTimes, moonPosition, moonPhase, moonHand, moonIcon, moonPath;
 	let solnoondeg = 185;
+	let longday, sixdeg, solarlag;
 
 	const periods = [
 		// name:                        from:               to:                 color:		darkColor:
@@ -94,48 +95,30 @@ const FastDemo = (function() {
 
 	function getSunTimes() {
 		sunTimes = null;
+		sixdeg = 2;
+		// un-comment only one of the longday definition lines to set how day length is determined
+			if (!longday) { longday = (Math.random() < 0.5) ? 3 : -3; } // initial coinflip
+			//longday = (Math.sin(now.getMinutes()/60 + now.getHours() * tau / 6 ) * 4 ) // slow year
+			//longday = (Math.sin((now.getMinutes() + seconds/60) * tau / 10 ) * 4 ) // warpspeed year
+		solarlag =2;
+		sunTimes = {
+			dawn: 17 - sixdeg - longday,
+			dusk: 47 + sixdeg + longday,
+			goldenHour: 47 - sixdeg + longday,
+			goldenHourEnd: 17 + sixdeg - longday,
+			nadir: 2,
+			nadir2: 2, // needs to be less than 60
+			nauticalDawn: 17 - (2 * sixdeg) - longday,
+			nauticalDusk: 47 + (2 * sixdeg) + longday,
+			night: 47 + (3 * sixdeg) + longday,
+			nightEnd: 17 - (3 * sixdeg) - longday,
+			solarNoon: 32,
+			sunrise: 17 - (0.15 * sixdeg) - longday,
+			sunriseEnd: 17 - longday,
+			sunset: 47 + (0.15 * sixdeg) + longday,
+			sunsetStart: 47 + longday
+		};
 
-		if ( false ) {
-		// ((now.getHours() % 6) > 3 )
-			//long day
-			sunTimes = {
-				dawn: 13,
-				dusk: 51,
-				goldenHour: 47,
-				goldenHourEnd: 17,
-				nadir: 2,
-				nadir2: 62,
-				nauticalDawn: 11,
-				nauticalDusk: 53,
-				night: 55,
-				nightEnd: 9,
-				solarNoon: 32,
-				sunrise: 14.7,
-				sunriseEnd: 15,
-				sunset: 49.3,
-				sunsetStart: 49
-			};
-		}
-		else {
-			//short day
-			sunTimes = {
-				dawn: 17,
-				dusk: 47,
-				goldenHour: 43,
-				goldenHourEnd: 21,
-				nadir: 2,
-				nadir2: 62,
-				nauticalDawn: 15,
-				nauticalDusk: 49,
-				night: 51,
-				nightEnd: 13,
-				solarNoon: 32,
-				sunrise: 18.7,
-				sunriseEnd: 19,
-				sunset: 45.3,
-				sunsetStart: 45
-			};
-		}
 
 		// draw time period arcs on clock face
 		drawTimePeriods();
@@ -482,7 +465,7 @@ const FastDemo = (function() {
 		if ((vhours - timerStart) >= 6 || (vhours - timerStart) <0) {
 			// update every quarter turn
 			getMoonPhase();
-			getSunTimes();
+			getSunTimes(); // uncomment to animate day length
 			// reset
 			timerStart = null;
 		}
