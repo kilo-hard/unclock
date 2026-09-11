@@ -49,35 +49,6 @@ const FastDemo = (function() {
 		['astronomicalEveningTwilight', 'nauticalDusk',     'night',            '#213c66',	'#001122'],
 		['lateEvening',                 'night',            'nadir2',           '#192029',	'#030303']
 	];
-	const textReplacements = {
-		'nadir' : 'Solar Midnight',
-		'earlyMorning' : 'Early Morning',
-		'nightEnd' : 'Astronomical Dawn',
-		'astronomicalMorningTwilight' : 'Astronomical Morning Twilight',
-		'nauticalDawn' : 'Nautical Dawn',
-		'nauticalMorningTwilight' : 'Nautical Morning Twilight',
-		'dawn' : 'Civil Dawn',
-		'civilMorningTwilight' : 'Civil Morning Twilight',
-		'sunrise' : 'Sunrise',
-		'sunriseEnd' : 'End of Sunrise',
-		'morningGoldenHour' : 'Morning Golden Hour',
-		'goldenHourEnd' : 'End of Golden Hour',
-		'morning' : 'Morning',
-		'solarNoon' : ' Solar Noon',
-		'afternoon' : 'Afternoon',
-		'goldenHour' : 'Start of Golden Hour',
-		'eveningGoldenHour' : 'Evening Golden Hour',
-		'sunsetStart' : 'Beginning of Sunset',
-		'sunset' : 'Sunset',
-		'civilEveningTwilight' : 'Civil Evening Twilight',
-		'dusk' : 'Civil Dusk',
-		'nauticalEveningTwilight' : 'Nautical Evening Twilight',
-		'nauticalDusk' : 'Nautical Dusk',
-		'astronomicalEveningTwilight' : 'Astronomical Evening Twilight',
-		'night' : 'Astronomical Dusk',
-		'lateEvening' : 'Late Evening',
-		'nadir2' : 'Solar Midnight'
-	};
 
 
 	function toDegrees(angle) {
@@ -272,19 +243,6 @@ const FastDemo = (function() {
 			}
 		}
 		if (debug) { console.log(`currentPeriod is ${currentPeriod}: ${periodsTemp[currentPeriod][0]}`); }
-	}
-
-
-	function getPeriodInfo(i) {
-		// get info for time periods
-		let p = periodsTemp[i];
-
-		let str = `<h3>${textReplacements[p[0]]}</h3>
-			<p>${textReplacements[p[1]]}<br><span class="nobr">${sunTimes[p[1]]}</span></p>
-			<p class="to">— to —</p>
-			<p>${textReplacements[p[2]]}<br><span class="nobr">${sunTimes[p[2]]}</span></p>`;
-
-		return str;
 	}
 
 
