@@ -105,7 +105,8 @@ var times = SunCalc.times = [
     [    -5.5, 'dawn',          'dusk'        ],
     [   -12, 'nauticalDawn',  'nauticalDusk'],
     [   -18, 'nightEnd',      'night'       ],
-    [     6, 'goldenHourEnd', 'goldenHour'  ]
+    [     6, 'goldenHourEnd', 'goldenHour'  ],
+    [     18, 'glareZoneEnd', 'glareZone'  ]
 ];
 
 // adds a custom time to the times config

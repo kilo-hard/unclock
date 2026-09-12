@@ -19,11 +19,12 @@
 	--overlay-border: #999;
 
 	/* time period bg colors */
-	--bg-day:        #ccddff;
+	--bg-day:        #aaddff;
+	--bg-glareZone:  #cef;
 	--bg-goldenHour: #eedd99;
 	--bg-sunset:     #ff9900;
 	--bg-twilight1:  #88a6d4;
-	--bg-twilight2:  #1e3c77;
+	--bg-twilight2:  #113366;
 	--bg-twilight3:  #1f3044;
 	--bg-night:      #192029;
 
@@ -74,11 +75,12 @@
 	--overlay-border: #4c4c4c;
 
 	/* time period bg colors */
-	--bg-twilight1:  #677ea1;
-	--bg-twilight2:  #0f2a55;
-	--bg-day:        #6699cc;
+	--bg-day:        #6699dd;
+	--bg-glareZone:  #8ac;
 	--bg-goldenHour: #bbaa77;
 	--bg-sunset:     #cc7700;
+	--bg-twilight1:  #7788aa;
+	--bg-twilight2:  #062255;
 	--bg-twilight3:  #0d1726;
 	--bg-night:      #030303;
 
@@ -138,8 +140,10 @@ section.overlay {background:var(--bg-overlay1);}
 #civilMorningTwilight        {fill:#88a6d4; fill:var(--bg-twilight1);}
 #sunrise                     {fill:#ff9900; fill:var(--bg-sunset);}
 #morningGoldenHour           {fill:#ffe988; fill:var(--bg-goldenHour);}
+#morningGlareZone            {fill:#eeddff; fill:var(--bg-glareZone);}
 #morning                     {fill:#dceaff; fill:var(--bg-day);}
 #afternoon                   {fill:#dceaff; fill:var(--bg-day);}
+#eveningGlareZone            {fill:#eeddff; fill:var(--bg-glareZone);}
 #eveningGoldenHour           {fill:#ffe988; fill:var(--bg-goldenHour);}
 #sunset                      {fill:#ff9900; fill:var(--bg-sunset);}
 #civilEveningTwilight        {fill:#88a6d4; fill:var(--bg-twilight1);}
