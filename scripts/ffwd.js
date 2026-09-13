@@ -165,37 +165,39 @@ const FastDemo = (function() {
 			// draw the arc - except...
 		}
 
-		//if (validTimeCount <= 3) {
+		if (validTimeCount <= 3) {
 			// nadir/noon/nadir2 are the only valid times, so 24 hrs of the same time period.
 			// check altitude of sun at noon (note: only happens at high latitudes)
-		//	let pT = periodsTemp;
-		//	let alt1 = toDegrees(noonPosition.altitude);  // degrees above horizon
-		//	let alt2 = toDegrees(nadirPosition.altitude);
-		//	let alt  = (alt1 + alt2) / 2;
-		//	let pt1, pt2;
-		//	if (debug) { console.log(`only 3 valid times (noon and nadir). noon.altitude: ${alt}, nadir.altitude: ${alt2}`); }
+			let pT = periodsTemp;
+			let alt1 = (90/sixdeg) + (longday * 6);  // degrees above horizon
+			let alt2 = (-90/sixdeg) + (longday * 6);
+			let alt  = (alt1 + alt2) / 2;
+			let pt1, pt2;
+			if (debug) { console.log(`only 3 valid times (noon and nadir). noon.altitude: ${alt}, nadir.altitude: ${alt2}`); }
 
-		//	if (alt >= 6) {
-		//		pt1 = 6; pt2 = 7; // morning/afternoon (daytime)
-		//	} else if ((alt < 6) && (alt >= -0.3)) {
-		//		pt1 = 5; pt2 = 8; // morning/evening goldenHour
-		//	} else if ((alt < -0.3) && (alt >= -0.833)) {
-		//		pt1 = 4; pt2 = 9; // sunrise/sunset
-		//	} else if ((alt <= -0.833) && (alt > -6)) {
-		//		pt1 = 3; pt2 = 10; // civil twilight
-		//	} else if ((alt <= -6) && (alt > -12)) {
-		//		pt1 = 2; pt2 = 11; // nautical twilight
-		//	} else if ((alt <= -12) && (alt > -18)) {
-		//		pt1 = 1; pt2 = 12; // astronomical twilight
-		//	} else if (alt <= -18) {
-		//		pt1 = 0; pt2 = 13; // night
-		//	}
-		//	if (debug) { console.log(pt1, pt2); }
-		//	pT[pt1][1] = 'nadir';
-		//	pT[pt1][2] = 'solarNoon';
-		//	pT[pt2][1] = 'solarNoon';
-		//	pT[pt2][2] = 'nadir2';
-		//}
+			if (alt >= 18) {
+				pt1 = 7; pt2 = 8; // morning/afternoon (daytime)
+			} else if ((alt < 18) && (alt >= 6)) {
+				pt1 = 6; pt2 = 9; // morning/evening glareZone
+			} else if ((alt < 6) && (alt >= -0.3)) {
+				pt1 = 5; pt2 = 10; // morning/evening goldenHour
+			} else if ((alt < -0.3) && (alt >= -0.833)) {
+				pt1 = 4; pt2 = 11; // sunrise/sunset
+			} else if ((alt <= -0.833) && (alt > -6)) {
+				pt1 = 3; pt2 = 12; // civil twilight
+			} else if ((alt <= -6) && (alt > -12)) {
+				pt1 = 2; pt2 = 13; // nautical twilight
+			} else if ((alt <= -12) && (alt > -18)) {
+				pt1 = 1; pt2 = 14; // astronomical twilight
+			} else if (alt <= -18) {
+				pt1 = 0; pt2 = 15; // night
+			}
+			if (debug) { console.log(pt1, pt2); }
+			pT[pt1][1] = 'nadir';
+			pT[pt1][2] = 'solarNoon';
+			pT[pt2][1] = 'solarNoon';
+			pT[pt2][2] = 'nadir2';
+		}
 
 		// draw time periods - finally
 		for (let i=0; i<periodsTemp.length; i++) {
