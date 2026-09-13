@@ -179,11 +179,11 @@ const FastDemo = (function() {
 				pt1 = 7; pt2 = 8; // morning/afternoon (daytime)
 			} else if ((alt < 18) && (alt >= 6)) {
 				pt1 = 6; pt2 = 9; // morning/evening glareZone
-			} else if ((alt < 6) && (alt >= -0.3)) {
+			} else if ((alt < 6) && (alt >= 0)) {
 				pt1 = 5; pt2 = 10; // morning/evening goldenHour
-			} else if ((alt < -0.3) && (alt >= -0.833)) {
+			} else if ((alt < 0) && (alt >= -0.9)) {
 				pt1 = 4; pt2 = 11; // sunrise/sunset
-			} else if ((alt <= -0.833) && (alt > -6)) {
+			} else if ((alt <= -0.9) && (alt > -6)) {
 				pt1 = 3; pt2 = 12; // civil twilight
 			} else if ((alt <= -6) && (alt > -12)) {
 				pt1 = 2; pt2 = 13; // nautical twilight
