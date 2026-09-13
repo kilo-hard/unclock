@@ -40,10 +40,10 @@ const FastDemo = (function() {
 		['civilMorningTwilight',        'dawn',             'sunrise',          '#88a6d4',	'#677ea1'],
 		['sunrise',                     'sunrise',          'sunriseEnd',       '#ff9900',	'#cc7a00'],
 		['morningGoldenHour',           'sunriseEnd',       'goldenHourEnd',    '#ffe988',	'#ccba6c'],
-		['morningGlareZone',            'goldenHourEnd',    'glareZoneEnd',     '#e7f7f7',	'#c0cbdc'],
-		['morning',                     'glareZoneEnd',     'solarNoon',        '#dceaff', 	'#b0bbcc'],
-		['afternoon',                   'solarNoon',        'glareZone',        '#dceaff',	'#b0bbcc'],
-		['eveningGlareZone',            'glareZone',        'goldenHour',       '#e7f7f7',	'#c0cbdc'],
+		['morningGlareZone',            'goldenHourEnd',    'glareZoneEnd',     '#dceaff',	'#c0cbdc'],
+		['morning',                     'glareZoneEnd',     'solarNoon',        '#aaddff', 	'#b0bbcc'],
+		['afternoon',                   'solarNoon',        'glareZone',        '#aaddff',	'#b0bbcc'],
+		['eveningGlareZone',            'glareZone',        'goldenHour',       '#dceaff',	'#c0cbdc'],
 		['eveningGoldenHour',           'goldenHour',       'sunsetStart',      '#ffe988',	'#ccba6c'],
 		['sunset',                      'sunsetStart',      'sunset',           '#ff9900',	'#cc7a00'],
 		['civilEveningTwilight',        'sunset',           'dusk',             '#88a6d4',	'#677ea1'],
@@ -75,23 +75,23 @@ const FastDemo = (function() {
 			//longday = (Math.sin((now.getMinutes() + seconds/60) * tau / 10 ) * 4 ) // warpspeed year
 		solarlag =2;
 		sunTimes = {
-			dawn: 17 - sixdeg -longday,
-			dusk: 47 + sixdeg +longday,
-			goldenHour: 47 - sixdeg +longday,
-			goldenHourEnd: 17 + sixdeg -longday,
-			glareZone: 47 - (3*sixdeg) +longday,
-			glareZoneEnd: 17 + (3*sixdeg) -longday,
-			nadir: 2,
-			nadir2: 2, // needs to be less than 60
-			nauticalDawn: 17 -(2*sixdeg) -longday,
-			nauticalDusk: 47 +(2*sixdeg) +longday,
-			night: 47 +(3*sixdeg) + longday,
-			nightEnd: 17 -(3*sixdeg) -longday,
-			solarNoon: 32,
-			sunrise: 17 -(0.15*sixdeg) -longday,
-			sunriseEnd: 17 -longday,
-			sunset: 47 +(0.15*sixdeg) +longday,
-			sunsetStart: 47 +longday
+			nadir: (60 + solarlag) % 60,
+			nadir2: (60 + solarlag) % 60,
+			nightEnd:     Math.abs(3*sixdeg + longday) < 15 ? (75 + solarlag -(3*sixdeg) -longday) %60 : invalid,
+			nauticalDawn: Math.abs(2*sixdeg + longday) < 15 ? (75 + solarlag -(2*sixdeg) -longday) %60 : invalid,
+			dawn:           Math.abs(sixdeg + longday) < 15 ? (75 + solarlag - sixdeg -longday) %60 : invalid,
+			sunrise:   Math.abs(0.15*sixdeg + longday) < 15 ? (75 + solarlag -(0.15*sixdeg) -longday) %60 : invalid,
+			sunriseEnd:     Math.abs(         longday) < 15 ? (75 + solarlag          -longday) %60 : invalid,
+			goldenHourEnd:  Math.abs(sixdeg - longday) < 15 ? (75 + solarlag + sixdeg -longday) %60 : invalid,
+			glareZoneEnd: Math.abs(3*sixdeg - longday) < 15 ? (75 + solarlag +(3*sixdeg) -longday) %60 : invalid,
+			solarNoon: 30 + solarlag,
+			glareZone:    Math.abs(3*sixdeg - longday) < 15 ? (45 + solarlag - (3*sixdeg) +longday) %60 : invalid,
+			goldenHour:     Math.abs(sixdeg - longday) < 15 ? (45 + solarlag - sixdeg +longday) %60 : invalid,
+			sunsetStart:    Math.abs(         longday) < 15 ? (45 + solarlag        +longday) %60 : invalid,
+			sunset:    Math.abs(0.15*sixdeg + longday) < 15 ? (45 + solarlag +(0.15*sixdeg) +longday) %60 : invalid,
+			dusk:           Math.abs(sixdeg + longday) < 15 ? (45 + solarlag + sixdeg +longday) %60 : invalid,
+			nauticalDusk: Math.abs(2*sixdeg + longday) < 15 ? (45 + solarlag +(2*sixdeg) +longday) %60 : invalid,
+			night:        Math.abs(3*sixdeg + longday) < 15 ? (45 + solarlag +(3*sixdeg) + longday) %60 : invalid,
 		};
 
 
@@ -149,16 +149,16 @@ const FastDemo = (function() {
 				continue;
 			} else if ( isNaN(t1) ) {
 				// beginning time is invalid, end time valid
-				if (i === 6)  continue; // morning
-				if (i === 13) continue; // lateEvening
+				if (i === 7)  continue; // morning
+				if (i === 15) continue; // lateEvening
 				// use nadir (for morning periods) or noon (for evening periods) as t1 instead
-				p[1] = (i <= 6) ? 'nadir' : 'solarNoon';
+				p[1] = (i <= 7) ? 'nadir' : 'solarNoon';
 			} else if ( isNaN(t2) ) {
 				// beginning time valid, end time invalid
 				if (i === 0) continue; // earlyMorning
-				if (i === 7) continue; // afternoon
+				if (i === 8) continue; // afternoon
 				// use noon (for morning periods) or nadir2 (for evening periods) as t2 instead
-				p[2] = (i <= 6) ? 'solarNoon' : 'nadir2';
+				p[2] = (i <= 7) ? 'solarNoon' : 'nadir2';
 			} else {
 				// both times valid - yay!
 			}
