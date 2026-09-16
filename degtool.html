@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>Horizon Calculator</title>
+	<meta name="description" content="A 24-hour clock that shows sunrise, sunset, golden hour, and twilight times for your current location. It also shows the current position and phase of the moon, and its rising and setting times.">
+	<meta name="keywords" content="24-hour, clock, sunrise, sunset, twilight, dawn, dusk, moon, moonrise, moonset, moon phase,">
+	<meta name="author" content="Geoff Pack">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#000">
+
+	<!--
+	<link rel="manifest" href="manifest.json?v=4.8.1">
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/colors.css">
+	<link rel="icon" type="image/png" href="icons/icon_512.png">
+	<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+ -->
+
+
+	<!-- iOS -->
+	<link rel="apple-touch-icon" type="image/png" href="icons/icon.png">
+	<link rel="apple-touch-startup-image" href="icons/icon.png">
+	<meta name="mobile-web-app-capable" content="yes">
+	<!-- meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" -->
+
+	<script src="libs/suncalc/suncalc.js"></script>
+	<script src="libs/astronomy/astronomy.browser.min.js"></script>
+
+	<script src="scripts/degtable.js"></script>
+</head>
+<body>
+
+	<div id="info1" class="info">
+		<h2 id="dateText">Getting date…</h2>
+		<p id="timeText"></p>
+		<p id="location">Getting location…</p>
+		<p id="mainTimes"></p>
+
+		<noscript>
+			<p><b>This site requires Javascript!</b></p>
+		</noscript>
+	</div>
+	<div id="info2" class="info"></div>
+	<section id="allTimes">
+		<div>
+			<h3>Horizon Sun Height Table</h3>
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">Morning</th>
+						<th scope="col">Degrees</th>
+						<th scope="col">Evening</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+<p></p>
+		</div>
+	</section>
+
+	<section id="settings">
+		<div>
+			<h3>Settings</h3>
+
+			<form >
+				<p> <button type="button" onclick="SunClock.getSunTimes(-1)">Earlier Day</button> <button type="button" onclick="SunClock.getSunTimes(1)">Later Day</button>  <button type="button" onclick="SunClock.getSunTimes(0)">Today</button></p>
+			</form>
+
+			<form id="settingsForm" onsubmit="return App.updateLocation(this);">
+				<p>
+					<label><input type="checkbox" name="hour12"> use 12-hour times</label>
+				</p>
+				<p>
+					<label><input type="checkbox" name="setLocationManually"> set location manually</label>
+				</p>
+				<p id="setLocation">
+					<label for="latitude">Latitude </label> <input name="latitude" id="latitude" type="number" min="-90"  max="90" step="any" placeholder="-90 to 90" required> <a href="#note2">ℹ︎</a><br>
+					<span id="note2"><small>Use <a href="https://en.wikipedia.org/wiki/Decimal_degrees" target="_blank">decimal degrees</a>. Should be a number between -90.0 and 90.0<br>1–2 decimal places is sufficient.</small></span>
+					<label for="longitude">Longitude </label> <input name="longitude" id="longitude" type="number" min="-180" max="180" step="any" placeholder="-180 to 180" required> <a href="#note3">ℹ︎</a><br>
+					<span id="note3"><small>Use <a href="https://en.wikipedia.org/wiki/Decimal_degrees" target="_blank">decimal degrees</a>. Should be a number between -180.0 and 180.0<br>1–2 decimal places is sufficient.</small></span>
+					<label></label> <input type="submit" value="Update">
+				</p>
+			</form>
+		</div>
+	</section>
+
+
+</body></html>
