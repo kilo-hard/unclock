@@ -23,7 +23,9 @@
 	--bg-glareZone:  #bef;
 	--bg-goldenHour: #eedd99;
 	--bg-sunset:     #ff9900;
+	--bg-twilight0:  #88bbdd;
 	--bg-twilight1:  #88a6d4;
+	--bg-blueHour:   #1e3c77;
 	--bg-twilight2:  #113366;
 	--bg-twilight3:  #1f3044;
 	--bg-night:      #192029;
@@ -79,7 +81,9 @@
 	--bg-glareZone:  #8ac;
 	--bg-goldenHour: #bbaa77;
 	--bg-sunset:     #cc7700;
+	--bg-twilight0:  #8899aa;
 	--bg-twilight1:  #7788aa;
+	--bg-blueHour:   #0f2a66;
 	--bg-twilight2:  #062255;
 	--bg-twilight3:  #0d1726;
 	--bg-night:      #030303;
@@ -136,8 +140,10 @@ section.overlay {background:var(--bg-overlay1);}
 /* time periods */
 #earlyMorning                {fill:#192029; fill:var(--bg-night);}
 #astronomicalMorningTwilight {fill:#213c66; fill:var(--bg-twilight3);}
-#nauticalMorningTwilight     {fill:#4574bc; fill:var(--bg-twilight2);}
+#nauticalMorningTwilight     {fill:#1e3c77; fill:var(--bg-twilight2);}
 #civilMorningTwilight        {fill:#88a6d4; fill:var(--bg-twilight1);}
+#morningBlueHour             {fill:#1e3c77; fill:var(--bg-blueHour);}
+#firstDaylight               {fill:#88a6d4; fill:var(--bg-twilight0);}
 #sunrise                     {fill:#ff9900; fill:var(--bg-sunset);}
 #morningGoldenHour           {fill:#ffe988; fill:var(--bg-goldenHour);}
 #morningGlareZone            {fill:#eeddff; fill:var(--bg-glareZone);}
@@ -146,8 +152,10 @@ section.overlay {background:var(--bg-overlay1);}
 #eveningGlareZone            {fill:#eeddff; fill:var(--bg-glareZone);}
 #eveningGoldenHour           {fill:#ffe988; fill:var(--bg-goldenHour);}
 #sunset                      {fill:#ff9900; fill:var(--bg-sunset);}
+#lastDaylight                {fill:#88a6d4; fill:var(--bg-twilight0);}
+#eveningBlueHour             {fill:#1e3c77; fill:var(--bg-blueHour);}
 #civilEveningTwilight        {fill:#88a6d4; fill:var(--bg-twilight1);}
-#nauticalEveningTwilight     {fill:#4574bc; fill:var(--bg-twilight2);}
+#nauticalEveningTwilight     {fill:#1e3c77; fill:var(--bg-twilight2);}
 #astronomicalEveningTwilight {fill:#213c66; fill:var(--bg-twilight3);}
 #lateEvening                 {fill:#192029; fill:var(--bg-night);}
 
